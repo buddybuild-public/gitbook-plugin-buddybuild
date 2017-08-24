@@ -446,7 +446,7 @@ h6, .markdown-section h6 {
   left: 28px;
   width: 28px;
   height: 28px;
-  background: url("../img/icon-circle_arrow.svg") no-repeat;
+  background: url("icon-circle_arrow.svg") no-repeat;
   z-index: 1;
 }
 
@@ -505,7 +505,7 @@ h6, .markdown-section h6 {
 }
 
 .community, .get-started {
-  background: #f4faff url("../img/community.svg") 98% top no-repeat;
+  background: #f4faff url("community.svg") 98% top no-repeat;
   padding: 32px 130px 32px 48px;
   margin: 4em 0;
 }
@@ -529,7 +529,7 @@ h6, .markdown-section h6 {
 }
 
 .get-started {
-  background: #f4faff url("../img/get-started.svg") right top no-repeat;
+  background: #f4faff url("get-started.svg") right top no-repeat;
 }
 
 .get-started .title {
@@ -655,7 +655,7 @@ h6, .markdown-section h6 {
   right: 0;
   width: 16px;
   height: 16px;
-  background: url("../img/icon-external_link.svg") no-repeat;
+  background: url("icon-external_link.svg") no-repeat;
 }
 
 .book-summary ul.summary > li ul li a {
@@ -1391,7 +1391,7 @@ span.default:after {
   left: 15px;
   width: 28px;
   height: 28px;
-  background: url("../img/icon-note.svg") no-repeat;
+  background: url("icon-note.svg") no-repeat;
   z-index: 1;
 }
 
@@ -1413,7 +1413,7 @@ span.default:after {
 }
 
 .admonitionblock.caution td.icon:before {
-  background: url("../img/icon-caution.svg") no-repeat;
+  background: url("icon-caution.svg") no-repeat;
   width: 32px;
   top: 4px;
   left: 11px;
@@ -1428,7 +1428,7 @@ span.default:after {
 }
 
 .admonitionblock.important td.icon:before {
-  background: url("../img/icon-important.svg") no-repeat;
+  background: url("icon-important.svg") no-repeat;
 }
 
 /* note */
@@ -1440,7 +1440,7 @@ span.default:after {
 }
 
 .admonitionblock.note td.icon:before {
-  background: url("../img/icon-note.svg") no-repeat;
+  background: url("icon-note.svg") no-repeat;
 }
 
 /* tip */
@@ -1452,7 +1452,7 @@ span.default:after {
 }
 
 .admonitionblock.tip td.icon:before {
-  background: url("../img/icon-tip.svg") no-repeat;
+  background: url("icon-tip.svg") no-repeat;
 }
 
 /* warning */
@@ -1464,6 +1464,6 @@ span.default:after {
 }
 
 .admonitionblock.warning td.icon:before {
-  background: url("../img/icon-warning.svg") no-repeat;
+  background: url("icon-warning.svg") no-repeat;
 }
 
