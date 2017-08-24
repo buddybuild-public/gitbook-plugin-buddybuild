@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Provides common assets required for buddybuild GitBooks",
   "engines": {
-    "gitbook": ">3.2.2"
+    "gitbook": ">3.2.0"
   },
   "gitbook": {
     "properties": {
