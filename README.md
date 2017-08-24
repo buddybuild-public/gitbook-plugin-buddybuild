@@ -1,7 +1,7 @@
 # gitbook-plugin-buddybuild
 
-This repo contains a GitBook plugin that provides CSS, Javascript,
-and other common assets required to build buddybuild books.
+This repo contains a GitBook plugin that provides CSS, images,
+Javascript, and other common assets required to build buddybuild books.
 
 ## Usage
 
@@ -23,6 +23,8 @@ for buddybuild books. The `en_US` dictionary is the large version. The
 `buddybuild` dictionary contains build/mobile development and
 buddybuild-specific terminology; it should be specified first in any
 `hunspell` invocation.
+
+The `img` folder contains images used by the included CSS.
 
 The `scripts` folder contains Perl scripts used by a book's `Makefile`:
 
