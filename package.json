@@ -1,0 +1,17 @@
+{
+  "name": "gitbook-plugin-buddybuild",
+  "version": "0.0.1",
+  "description": "Provides common assets required for buddybuild GitBooks",
+  "engines": {
+    "gitbook": ">3.2.2"
+  },
+  "gitbook": {
+    "properties": {
+      "myConfigKey": {
+        "type": "string",
+        "default": "it's the default value",
+        "description": "It defines my awesome config!"
+      }
+    }
+  }
+}
