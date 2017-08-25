@@ -291,21 +291,3 @@ BB.updateToolbarButtons = function () {
     ]
   });
 };
-
-require(['gitbook', 'jquery'], function(gitbook, $) {
-
-  gitbook.events.on('page.change', function() {
-    tocInit();
-    enableSyntaxHighlighting();
-    makePopularDocsClickable();
-    makeShowMoreClickable();
-    initEditTooltip();
-    initScroll();
-
-    $(".book").removeClass("without-animation");
-  });
-
-  gitbook.events.bind('start', function(e, config) {
-    BB.updateToolbarButtons();
-  });
-});
