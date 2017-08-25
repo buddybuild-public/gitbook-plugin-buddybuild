@@ -89,7 +89,7 @@ BB.tocInit = function () {
   // expand current entry, if any
   var activeChapter = BB.tocParent($(".chapter.active"));
   activeChapter.removeClass("collapse-me");
-  tocExpand(activeChapter);
+  BB.tocExpand(activeChapter);
 
   // collapse all non-active top-level entries
   $(BB.NAV_SELECTOR)
