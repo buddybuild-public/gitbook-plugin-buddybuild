@@ -1,4 +1,4 @@
-372
+396
 10a
 13b
 1a
@@ -31,6 +31,7 @@ AppIcon
 AppStore
 AssetsLibrary
 Atlassian
+AuthTests
 BOOL
 BUILDNO
 BatchedBridge
@@ -47,6 +48,7 @@ CCMenu
 CDVPlugin
 CFBundleVersion
 CIDR
+CSV
 CallbackURL
 Cartfile
 CocoaPod/S
@@ -80,6 +82,8 @@ MacOS
 MainActivity
 MainApplication
 MultiApkShadowedActiveApk
+MyApp
+MyAppTests
 NSDate
 NSDictionary
 NSNumber
@@ -126,11 +130,13 @@ UI
 UIApplication
 UIApplicationDelegate
 UIResponder
+UTF
 UTF8String
 UpdateSDK
 Uploader
 UserID
 VM/S
+VPN
 VersionCode
 VersionName
 WebHooks
@@ -146,16 +152,19 @@ acra
 adb
 adoc
 afterEvaluate
+ajax
 alloc
 allprojects
 alpha/d
 amazonaws
 api
 apis
+apitoken
 aren
 armeabi
 asl
 aslLevel
+async
 bbBuildNumber
 bitbucket
 bitbucketci
@@ -177,6 +186,7 @@ cocoapod/S
 commandLine
 config/S
 cordova
+crossDomain
 dSYM/S
 debuggable
 defaultConfig
@@ -188,6 +198,7 @@ doesn
 dropdown
 eachDependency
 eg
+endmethod
 error/d
 facebook
 fbsdk
@@ -216,10 +227,12 @@ hasProperty
 helloworldandroid
 hipchat
 hostname
+html
 https
 iOS
 img
 incentivize/SE
+includeDeleted
 indexOf
 ini
 install/B
@@ -233,6 +246,7 @@ jessie
 jira
 jks
 jpg
+jquery
 js
 jsBundleDirDebug
 json
@@ -253,6 +267,7 @@ linkattrs
 loweralpha
 lt
 lts
+m2048
 m2repository
 md
 mergeReleaseResources
@@ -277,6 +292,7 @@ onboard/SDG
 ons
 option/d
 p12
+param/S
 plist
 pluginname
 png
@@ -314,6 +330,10 @@ setText
 setUp
 setUserDisplayNameCallback
 shelljs
+showFailed
+showFileCoverage
+showFunctionCoverage
+showPassing
 signingConfig/S
 simplejson
 squareup
@@ -333,6 +353,8 @@ svg
 symbolicate
 takeScreenshotAndShowFeedbackScreen
 tearDown
+testLogin
+testSignUp
 theLog
 tid
 toString
@@ -345,6 +367,7 @@ uncomment
 unorm
 uploader
 url
+urlencode
 urlencoded
 useVersion
 userInfo
