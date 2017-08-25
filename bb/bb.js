@@ -78,7 +78,7 @@ BB.tocInit = function () {
   $(BB.NAV_SELECTOR)
     .children("li.chapter")
     .on("click", function (e) {
-      tocToggle($(this));
+      BB.tocToggle($(this));
     });
 
   // mark all top-level entries as candidates for collapse
@@ -87,7 +87,7 @@ BB.tocInit = function () {
     .addClass("collapse-me");
 
   // expand current entry, if any
-  var activeChapter = tocParent($(".chapter.active"));
+  var activeChapter = BB.tocParent($(".chapter.active"));
   activeChapter.removeClass("collapse-me");
   tocExpand(activeChapter);
 
@@ -100,10 +100,10 @@ BB.tocInit = function () {
 
 BB.tocToggle = function ($elem) {
   if ($elem.hasClass("expanded")) {
-    tocCollapse($elem);
+    BB.tocCollapse($elem);
   }
   else {
-    tocExpand($elem);
+    BB.tocExpand($elem);
   }
 };
 
@@ -170,7 +170,7 @@ BB.findScrollOffset = function (hash) {
       if (pct >= 0) {
         return Math.floor( $(".book-body").height() * pct / 100);
       }
-      return defaultScroll(hash);
+      return BB.defaultScroll(hash);
       break;
 
     case 'P':
@@ -185,7 +185,7 @@ BB.findScrollOffset = function (hash) {
           return $(target[par - 1]).offset().top;
         }
       }
-      return defaultScroll(hash);
+      return BB.defaultScroll(hash);
       break;
 
     case '/':
@@ -197,11 +197,11 @@ BB.findScrollOffset = function (hash) {
           return $(target[0]).offset().top;
         }
       }
-      return defaultScroll(hash);
+      return BB.defaultScroll(hash);
       break;
 
     default:
-      return defaultScroll(hash);
+      return BB.defaultScroll(hash);
   }
 
   return 0;
