@@ -1,4 +1,4 @@
-414
+418
 02T22
 100a
 10a
@@ -27,6 +27,7 @@
 58b899061baced0100616172
 5a
 6s
+728Z
 7a
 7aa
 7b
@@ -241,6 +242,7 @@ gms
 gradle
 gradlew
 gt
+hardcode
 hasProperty
 helloworldandroid
 hipchat
@@ -256,6 +258,7 @@ ini
 install/B
 integ
 ios
+ip
 ipa
 itunes
 javascript
@@ -347,6 +350,7 @@ setMetadataObject
 setText
 setUp
 setUserDisplayNameCallback
+sha
 shelljs
 showFailed
 showFileCoverage
