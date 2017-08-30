@@ -262,7 +262,6 @@ h6, .markdown-section h6 {
   padding: 2px 0 0 30px;
   list-style: none;
   border-left: 2px dotted #cce8f9;
-  clear: both;
 }
 
 .markdown-section ol > li:before {
@@ -289,6 +288,12 @@ h6, .markdown-section h6 {
   font-family: proxima-nova,sans-serif;
   font-size: 16px;
   line-height: 1.5;
+}
+
+.markdown-section ol > li:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .markdown-section ol.loweralpha > li:before, ol[type=a] > li:before {
@@ -1077,9 +1082,9 @@ span.image.thumb > img {
 }
 
 span.image.frame > img {
-  padding: 1em;
-  border-radius: 0.25em;
-  box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
 }
 
 /* code blocks ---------------------------------------------------- */
