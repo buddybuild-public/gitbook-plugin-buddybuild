@@ -118,7 +118,7 @@
   height: 70px;
 }
 
-.book-header h1 {
+.book-header h1, .book-header:hover h1 {
   display: none;
 }
 
