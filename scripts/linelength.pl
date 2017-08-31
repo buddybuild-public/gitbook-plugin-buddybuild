@@ -21,7 +21,8 @@ sub DEBUG {
 my $dir = $options{d} or usage("No scan directory provided!");
 my $length = $options{l} || 80;
 
-print "Checking line lengths in '$dir'...\n";
+print "Checking line lengths in '$dir'... ";
+DEBUG "\n";
 our @files = findadoc($dir);
 DEBUG "File scanning complete.\n\n";
 my $results = check_length($length, @files);

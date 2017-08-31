@@ -24,7 +24,8 @@ my $bbdict = catfile($dicts, 'buddybuild');
 my $usdict = catfile($dicts, 'en_US');
 our $hunspell_command = "hunspell -d $bbdict,$usdict -l";
 
-print "Checking spelling in '$dir'...\n";
+print "Checking spelling in '$dir'... ";
+DEBUG "\n";
 our @files = findadoc($dir);
 DEBUG "File scanning complete.\n\n";
 my $results = check_spelling(@files);
