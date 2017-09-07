@@ -36,21 +36,45 @@ unless (scalar keys %$results) {
 }
 
 print "Spelling errors found!\n";
-my $max = 0;
-foreach my $key (keys %$results) {
-  my $l = length $key;
-  $max = $l if $l > $max;
-}
-my $indent = " " x $max;
 
-foreach my $key (sort keys %$results) {
-  my $label = sprintf "%". $max ."s", $key;
-  my $result = $results->{$key};
+# Determine the longest misspelling; makes the output nicer
+my $maxw = 0;
+foreach my $key (keys %{$results->{words}}) {
+  my $l = length $key;
+  $maxw = $l if $l > $maxw;
+}
+my $indentw = " " x $maxw;
+
+# Determine the longest filename; makes the output nicer
+my $maxf = 0;
+foreach my $key (keys %{$results->{files}}) {
+  my $l = length $key;
+  $maxf = $l if $l > $maxf;
+}
+my $indentf = " " x $maxf;
+
+# Output the misspellings, and where they appear
+print "Misspelled words:\n";
+foreach my $key (sort keys %{$results->{words}}) {
+  my $label = sprintf "%". $maxw ."s", $key;
+  my $result = $results->{words}->{$key};
   foreach my $path (sort keys $result) {
     printf "%s  %2dx %s\n", $label, $result->{$path}, $path;
-    $label = $indent;
+    $label = $indentw;
   }
 }
+
+# Output the files, and the misspellings contained within
+print "\nWhere the misspellings occur:\n";
+foreach my $key (sort keys %{$results->{files}}) {
+  my $label = sprintf "%". $maxf ."s", $key;
+  my $result = $results->{files}->{$key};
+  foreach my $path (sort keys $result) {
+    printf "%s  %2dx %s\n", $label, $result->{$path}, $path;
+    $label = $indentf;
+  }
+}
+
 exit 1;
 
 sub findadoc {
@@ -80,7 +104,12 @@ sub findadoc {
 }
 
 sub check_spelling {
-  my %results;
+  my %results = (
+    'words' => {},
+    'files' => {},
+  );
+  my $words = $results{words};
+  my $files = $results{files};
   foreach my $file (@_) {
     DEBUG "Checking spelling in '$file'...\n";
     my $command = $hunspell_command ." ". $file;
@@ -88,9 +117,13 @@ sub check_spelling {
     next unless length $output;
     foreach my $line (split m/\n/, $output) {
       DEBUG "Bad spelling '$line'\n";
-      $results{$line} = {} unless exists $results{$line};
-      $results{$line}->{$file} = 0 unless exists $results{$line}->{$file};
-      $results{$line}->{$file}++;
+      $words->{$line} = {} unless exists $words->{$line};
+      $words->{$line}->{$file} = 0 unless exists $words->{$line}->{$file};
+      $words->{$line}->{$file}++;
+
+      $files->{$file} = {} unless exists $files->{$file};
+      $files->{$file}->{$line} = 0 unless exists $files->{$file}->{$line};
+      $files->{$file}->{$line}++;
     }
   }
   DEBUG "Done checking spelling.\n";
