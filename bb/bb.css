@@ -1099,7 +1099,7 @@ span.image.frame > img {
   word-wrap: break-word;
   border: 0 none;
   font-size: 0.9em;
-  background-color: #f0f2f4;
+  background-color: #f0f2f4 !important;
 }
 
 .markdown-section p code {
