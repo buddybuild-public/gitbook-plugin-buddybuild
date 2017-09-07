@@ -290,7 +290,7 @@ h6, .markdown-section h6 {
   line-height: 1.5;
 }
 
-.markdown-section li.clear:after,
+.markdown-section .clear:after,
 .markdown-section ol > li:after {
   content: "";
   display: table;
