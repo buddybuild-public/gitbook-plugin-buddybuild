@@ -1119,6 +1119,7 @@ span.image.frame > img {
   font-family: proxima-nova, sans-serif;
   font-size: 1.1em;
   font-weight: bold;
+  line-height: 1.4;
 }
 
 /* lists ---------------------------------------------------------- */
