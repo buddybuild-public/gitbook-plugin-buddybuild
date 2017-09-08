@@ -30,12 +30,13 @@ our @files = findadoc($dir);
 DEBUG "File scanning complete.\n\n";
 my $results = check_spelling(@files);
 
-unless (scalar keys %$results) {
+my $count = scalar keys %{$results->{words}};
+unless ($count) {
   print "No spelling errors found!\n";
   exit 0;
 }
 
-print "Spelling errors found!\n";
+print "$count misspelled words found!\n";
 
 # Determine the longest misspelling; makes the output nicer
 my $maxw = 0;
