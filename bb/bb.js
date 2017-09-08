@@ -138,7 +138,7 @@ BB.initScroll = function () {
   var headerOffset = 100;
   if (window.location.hash && window.location.hash.length) {
     var hash = window.location.hash.split("#")[1];
-    var offset = findScrollOffset(hash);
+    var offset = BB.findScrollOffset(hash);
     if (offset > headerOffset) offset -= headerOffset;
     if (offset >= 0) {
       $("html,body").animate({
