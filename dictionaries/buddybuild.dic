@@ -1,4 +1,4 @@
-508
+510
 02T22
 0p648
 100a
@@ -118,6 +118,7 @@ MainApplication
 MultiApkShadowedActiveApk
 MyApp
 MyAppTests
+NSBundle
 NSDate
 NSDictionary
 NSNumber
@@ -197,6 +198,7 @@ amazonaws
 api
 apis
 apitoken
+appStoreReceiptURL
 aren
 armeabi
 asl
