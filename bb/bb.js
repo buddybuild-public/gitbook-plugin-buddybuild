@@ -141,6 +141,7 @@ BB.initScroll = function () {
     var offset = BB.findScrollOffset(hash);
     if (offset > headerOffset) offset -= headerOffset;
     if (offset >= 0) {
+      console.log("BB offset:", offset);
       $("html,body").animate({
         scrollTop: Math.floor(offset)
       }, 300);
