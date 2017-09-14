@@ -1,4 +1,4 @@
-511
+513
 02T22
 0p648
 100a
@@ -262,6 +262,7 @@ faraday
 fastimage
 fastlane
 fbsdk
+fetchCompletionHandler
 ffi
 fi
 fileName
@@ -477,6 +478,7 @@ unf
 unicode
 unorm
 uploader
+upperalpha
 url
 urlencode
 urlencoded
