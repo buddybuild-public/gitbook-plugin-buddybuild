@@ -1,4 +1,4 @@
-514
+516
 02T22
 0p648
 100a
@@ -95,6 +95,7 @@ DNS
 DependencyResolveDetails
 Dev
 FBSDKShareKit
+FBSnapshotTestCase
 Facebook
 FinalizableReference
 GIF
@@ -178,8 +179,9 @@ VersionCode
 VersionName
 WebHooks
 Win7
-XCTests
+XCTest/S
 XCUIApplication
+XCUITest
 Xcode
 YAML
 ZipException
