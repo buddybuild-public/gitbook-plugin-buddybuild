@@ -1,4 +1,4 @@
-524
+525
 02T22
 0p648
 100a
@@ -331,6 +331,7 @@ jquery
 js
 jsBundleDirDebug
 json
+jumboMode
 jwt
 kapt
 keyAlias
