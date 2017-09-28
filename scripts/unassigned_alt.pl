@@ -32,7 +32,7 @@ unless (scalar keys %$results) {
   exit 0;
 }
 
-print "Unassigned image alt text found!\n";
+print "problems found!\n";
 foreach my $file (sort keys %$results) {
   print "In '$file':\n";
   foreach my $details (@{ $results->{$file} }) {
