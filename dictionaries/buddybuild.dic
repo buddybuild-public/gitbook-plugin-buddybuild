@@ -1,4 +1,4 @@
-526
+527
 02T22
 0p648
 100a
@@ -474,6 +474,7 @@ testLogin
 testSignUp
 theLog
 tid
+titletext
 toString
 travis
 trello
