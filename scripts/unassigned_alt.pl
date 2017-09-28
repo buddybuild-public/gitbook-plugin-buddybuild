@@ -36,7 +36,7 @@ print "Unassigned image alt text found!\n";
 foreach my $file (sort keys %$results) {
   print "In '$file':\n";
   foreach my $details (@{ $results->{$file} }) {
-    printf "  Line %d: %d characters\n", $details->{line}, $details->{chars};
+    printf "  Line %d: %s\n", $details->{line}, $details->{text};
   }
 }
 exit 1;
@@ -91,7 +91,7 @@ sub check_alt {
         $results{$file} = [] unless exists $results{$file};
         push @{$results{$file}}, {
           line  => $count,
-          chars => length $line,
+          text => $line,
         };
       }
     }
