@@ -33,12 +33,15 @@ unless (scalar keys %$results) {
 }
 
 print "problems found!\n";
+my $count = 0;
 foreach my $file (sort keys %$results) {
   print "In '$file':\n";
   foreach my $details (@{ $results->{$file} }) {
     printf "  Line %d: %s\n", $details->{line}, $details->{text};
+    $count++;
   }
 }
+print "$count to be fixed.\n";
 exit 1;
 
 sub findadoc {
