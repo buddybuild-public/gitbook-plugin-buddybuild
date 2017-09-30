@@ -1124,6 +1124,7 @@ span.image.frame > img {
 
 /* lists ---------------------------------------------------------- */
 
+.markdown-section li > .openblock:last-child .content *:last-child pre,
 .markdown-section li > .paragraph:last-child p,
 .markdown-section li > *:last-child {
   margin-bottom: 0;
