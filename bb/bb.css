@@ -264,6 +264,10 @@ h6, .markdown-section h6 {
   border-left: 2px dotted #cce8f9;
 }
 
+.markdown-section ol > li + li {
+  margin-top: 8px;
+}
+
 .markdown-section ol > li:before {
   content: counter(li);
   counter-increment: li;
