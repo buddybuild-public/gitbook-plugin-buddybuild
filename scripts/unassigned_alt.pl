@@ -5,6 +5,7 @@ use warnings;
 
 use File::Spec::Functions;
 use Getopt::Std;
+use Term::ANSIColor;
 
 our %options;
 getopts('hvd:', \%options);
@@ -28,16 +29,16 @@ DEBUG "File scanning complete.\n\n";
 my $results = check_alt($length, @files);
 
 unless (scalar keys %$results) {
-  print "None found!\n";
+  print color('bold green'), "none found!", color('reset'), "\n";
   exit 0;
 }
 
-print "problems found!\n";
+print color('bold red'), "problems found!", color('reset'), "\n";
 my $count = 0;
 foreach my $file (sort keys %$results) {
-  print "In '$file':\n";
+  print color('magenta'), "$file", color('reset'), "\n";
   foreach my $details (@{ $results->{$file} }) {
-    printf "  Line %d: %s\n", $details->{line}, $details->{text};
+    printf "%s%d%s: %s\n", color('green'), $details->{line}, color('reset'), $details->{text};
     $count++;
   }
 }
