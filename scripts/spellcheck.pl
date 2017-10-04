@@ -3,10 +3,11 @@
 use strict;
 use warnings;
 
+use File::Basename;
 use File::Spec::Functions;
 use Getopt::Std;
 use Term::ANSIColor;
-use lib '.';
+use lib dirname (__FILE__);
 use BB;
 
 our %options;
