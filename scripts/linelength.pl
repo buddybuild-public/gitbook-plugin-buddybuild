@@ -96,8 +96,9 @@ sub check_length {
 
         if (length $line > $length) {
           my $test = substr($line, 0, $length);
-          if ($test =~ m/ /) {
-            # link/image has a space we could wrap on, within the length
+          if ($test =~ m/:.* /) {
+            # link/image has a space after the colon that we could wrap
+            # on, within the length
             $skip = 0;
           }
         }
