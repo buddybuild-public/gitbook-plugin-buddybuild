@@ -42,7 +42,8 @@ foreach my $file (sort keys %$results) {
     $count++;
   }
 }
-print "$count to be fixed.\n";
+print color('bold red'), $count, color('reset bold'), " to be fixed.",
+      color('reset'), "\n";
 exit 1;
 
 sub findadoc {
