@@ -91,8 +91,21 @@ sub check_length {
 
       # skip links+images, as they often have long URLs that cannot split
       if ($line =~ m/(link|image):[^\[]+\[/) {
-        BB::DEBUG "Skipping a $1\n";
-        next;
+        my $type = $1;
+        my $skip = 1;
+
+        if (length $line > $length) {
+          my $test = substr($line, 0, $length);
+          if ($test =~ m/ /) {
+            # link/image has a space we could wrap on, within the length
+            $skip = 0;
+          }
+        }
+
+        if ($skip) {
+          BB::DEBUG "Skipping a $type\n";
+          next;
+        }
       }
 
       # skip URLs
