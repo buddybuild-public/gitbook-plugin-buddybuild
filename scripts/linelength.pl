@@ -3,76 +3,48 @@
 use strict;
 use warnings;
 
-use File::Spec::Functions;
 use Getopt::Std;
+use Term::ANSIColor;
+use lib '.';
+use BB;
 
 our %options;
 getopts('hvd:l:', \%options);
 
 usage() if $options{h};
 
-our $VERBOSE = $options{v} ? 1 : 0;
-
-sub DEBUG {
-  return unless $VERBOSE;
-  print $_ for @_;
-}
+BB::set_verbose($options{v} ? 1 : 0);
 
 my $dir = $options{d} or usage("No scan directory provided!");
 my $length = $options{l} || 80;
 
 print "Checking line lengths in '$dir'... ";
-DEBUG "\n";
-our @files = findadoc($dir);
-DEBUG "File scanning complete.\n\n";
+BB::DEBUG "\n";
+our @files = BB::findadoc($dir);
+BB::DEBUG "File scanning complete.\n\n";
 my $results = check_length($length, @files);
 
 unless (scalar keys %$results) {
-  print "No files exceed line length of $length!\n";
+  print color('bold green'), "all files fit within $length columns!", color('reset'), "\n";
   exit 0;
 }
 
-print "Line length violations found!\n";
+print color('bold red'), "Line length violations found!", color('reset'), "\n";
 foreach my $file (sort keys %$results) {
-  print "In '$file':\n";
+  print color('magenta'), $file, color('reset'), "\n";
   foreach my $details (@{ $results->{$file} }) {
-    printf "  Line %d: %d characters\n", $details->{line}, $details->{chars};
+    printf "%s%d%s: %s%d%s characters\n", color('green'), $details->{line}, color('reset'),
+            color('red'), $details->{chars}, color('reset');
   }
 }
 exit 1;
-
-sub findadoc {
-  my $dir = shift;
-
-  my @files;
-  DEBUG "Scanning '$dir'...\n";
-  opendir(my $dh, $dir)
-    or die "Cannot open directory '$dir': $!\n";
-
-  while (my $file = readdir $dh) {
-    next if $file eq '.';
-    next if $file eq '..';
-
-    my $path = catfile($dir, $file);
-    if (-d $path) {
-      push @files, findadoc($path);
-      next;
-    }
-    next unless $file =~ m/\.adoc$/;
-    DEBUG "Found '$path'\n";
-    push @files, $path;
-  }
-
-  closedir $dh;
-  return @files;
-}
 
 sub check_length {
   my $length = shift;
 
   my %results;
   foreach my $file (@_) {
-    DEBUG "Checking line length in '$file'...\n";
+    BB::DEBUG "Checking line length in '$file'...\n";
     open my $fh, '<', $file
       or die "Couldn't open file '$file': $!\n";
     chomp(my @lines = <$fh>);
@@ -84,7 +56,7 @@ sub check_length {
 
     foreach my $line (@lines) {
       $count++;
-      DEBUG "Line $count: '$line'\n";
+      BB::DEBUG "Line $count: '$line'\n";
 
       # identify source blocks
       if ($line =~ m/\[source[^\]]*\]/) {
@@ -96,40 +68,40 @@ sub check_length {
       if ($in_source) {
         if ($line =~ m/^(-|=)+$/) {
           if (length $delimiter and $delimiter eq $1) {
-            DEBUG "End delimiter for source block found.\n";
+            BB::DEBUG "End delimiter for source block found.\n";
             $delimiter = '';
             next;
           }
           if ($delimiter eq '') {
-            DEBUG "Source block start delimiter found.\n";
+            BB::DEBUG "Source block start delimiter found.\n";
             $delimiter = $1;
             next;
           }
         }
-        DEBUG "Skipping source content...\n";
+        BB::DEBUG "Skipping source content...\n";
         next;
       }
 
       # Skip titles, because they have to appear on one line
       if ($line =~ m/^=+ /) {
-        DEBUG "Skipping title\n";
+        BB::DEBUG "Skipping title\n";
         next;
       }
 
       # skip links+images, as they often have long URLs that cannot split
       if ($line =~ m/(link|image):[^\[]+\[/) {
-        DEBUG "Skipping a $1\n";
+        BB::DEBUG "Skipping a $1\n";
         next;
       }
 
       # skip URLs
       if ($line =~ m@(ht|f)tps?://@) {
-        DEBUG "Skipping a URL\n";
+        BB::DEBUG "Skipping a URL\n";
         next;
       }
 
       if (length $line > $length) {
-        DEBUG "Line length violation for '$line'\n";
+        BB::DEBUG "Line length violation for '$line'\n";
         $results{$file} = [] unless exists $results{$file};
         push @{$results{$file}}, {
           line  => $count,
@@ -138,7 +110,7 @@ sub check_length {
       }
     }
   }
-  DEBUG "Done checking line lengths.\n";
+  BB::DEBUG "Done checking line lengths.\n";
   return \%results;
 }
 

@@ -5,17 +5,16 @@ use warnings;
 
 use File::Spec::Functions;
 use Getopt::Std;
+use Term::ANSIColor;
+use lib '.';
+use BB;
 
 our %options;
 getopts('hvd:D:', \%options);
 
 usage() if $options{h};
 
-our $VERBOSE = $options{v} ? 1 : 0;
-sub DEBUG {
-  return unless $VERBOSE;
-  print $_ for @_;
-}
+BB::set_verbose($options{v} ? 1 : 0);
 
 my $dir = $options{d} or usage("No scan directory provided!");
 our $dicts = $options{D} or usage("No dictionary path provided!");
@@ -25,18 +24,18 @@ my $usdict = catfile($dicts, 'en_US');
 our $hunspell_command = "hunspell -d $bbdict,$usdict -l";
 
 print "Checking spelling in '$dir'... ";
-DEBUG "\n";
-our @files = findadoc($dir);
-DEBUG "File scanning complete.\n\n";
+BB::DEBUG "\n";
+our @files = BB::findadoc($dir);
+BB::DEBUG "File scanning complete.\n\n";
 my $results = check_spelling(@files);
 
 my $count = scalar keys %{$results->{words}};
 unless ($count) {
-  print "No spelling errors found!\n";
+  print color('bold green'), "No spelling errors found!", color('reset'), "\n";
   exit 0;
 }
 
-print "$count misspelled words found!\n";
+print color('bold red'), "$count misspelled words found!", color('reset'), "\n";
 
 # Determine the longest misspelling; makes the output nicer
 my $maxw = 0;
@@ -55,54 +54,32 @@ foreach my $key (keys %{$results->{files}}) {
 my $indentf = " " x $maxf;
 
 # Output the misspellings, and where they appear
-print "Misspelled words:\n";
+print color('bold'), "Misspelled words:", color('reset'), "\n";
 foreach my $key (sort keys %{$results->{words}}) {
   my $label = sprintf "%". $maxw ."s", $key;
   my $result = $results->{words}->{$key};
   foreach my $path (sort keys $result) {
-    printf "%s  %2dx %s\n", $label, $result->{$path}, $path;
+    printf "%s%s%s  %2dx %s%s%s\n", color('red'), $label, color('reset'),
+            $result->{$path},
+            color('magenta'), $path, color('reset');
     $label = $indentw;
   }
 }
 
 # Output the files, and the misspellings contained within
-print "\nWhere the misspellings occur:\n";
+print "\n", color('bold'), "Where the misspellings occur:", color('reset'), "\n";
 foreach my $key (sort keys %{$results->{files}}) {
   my $label = sprintf "%". $maxf ."s", $key;
   my $result = $results->{files}->{$key};
   foreach my $path (sort keys $result) {
-    printf "%s  %2dx %s\n", $label, $result->{$path}, $path;
+    printf "%s%s%s  %2dx %s%s%s\n", color('magenta'), $label, color('reset'),
+            $result->{$path},
+            color('red'), $path, color('reset');
     $label = $indentf;
   }
 }
 
 exit 1;
-
-sub findadoc {
-  my $dir = shift;
-
-  my @files;
-  DEBUG "Scanning '$dir'...\n";
-  opendir(my $dh, $dir)
-    or die "Cannot open directory '$dir': $!\n";
-
-  while (my $file = readdir $dh) {
-    next if $file eq '.';
-    next if $file eq '..';
-
-    my $path = catfile($dir, $file);
-    if (-d $path) {
-      push @files, findadoc($path);
-      next;
-    }
-    next unless $file =~ m/\.adoc$/;
-    DEBUG "Found '$path'\n";
-    push @files, $path;
-  }
-
-  closedir $dh;
-  return @files;
-}
 
 sub check_spelling {
   my %results = (
@@ -112,12 +89,12 @@ sub check_spelling {
   my $words = $results{words};
   my $files = $results{files};
   foreach my $file (@_) {
-    DEBUG "Checking spelling in '$file'...\n";
+    BB::DEBUG "Checking spelling in '$file'...\n";
     my $command = $hunspell_command ." ". $file;
     my $output = `$command`;
     next unless length $output;
     foreach my $line (split m/\n/, $output) {
-      DEBUG "Bad spelling '$line'\n";
+      BB::DEBUG "Bad spelling '$line'\n";
       $words->{$line} = {} unless exists $words->{$line};
       $words->{$line}->{$file} = 0 unless exists $words->{$line}->{$file};
       $words->{$line}->{$file}++;
@@ -127,7 +104,7 @@ sub check_spelling {
       $files->{$file}->{$line}++;
     }
   }
-  DEBUG "Done checking spelling.\n";
+  BB::DEBUG "Done checking spelling.\n";
   return \%results;
 }
 

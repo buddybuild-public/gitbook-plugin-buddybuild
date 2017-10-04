@@ -3,29 +3,25 @@
 use strict;
 use warnings;
 
-use File::Spec::Functions;
 use Getopt::Std;
 use Term::ANSIColor;
+use lib '.';
+use BB;
 
 our %options;
 getopts('hvd:', \%options);
 
 usage() if $options{h};
 
-our $VERBOSE = $options{v} ? 1 : 0;
-
-sub DEBUG {
-  return unless $VERBOSE;
-  print $_ for @_;
-}
+BB::set_verbose($options{v} ? 1 : 0);
 
 my $dir = $options{d} or usage("No scan directory provided!");
 my $length = $options{l} || 80;
 
 print "Checking for unassigned image alt text in '$dir'... ";
-DEBUG "\n";
-our @files = findadoc($dir);
-DEBUG "File scanning complete.\n\n";
+BB::DEBUG "\n";
+our @files = BB::findadoc($dir);
+BB::DEBUG "File scanning complete.\n\n";
 my $results = check_alt($length, @files);
 
 unless (scalar keys %$results) {
@@ -46,38 +42,12 @@ print color('bold red'), $count, color('reset bold'), " to be fixed.",
       color('reset'), "\n";
 exit 1;
 
-sub findadoc {
-  my $dir = shift;
-
-  my @files;
-  DEBUG "Scanning '$dir'...\n";
-  opendir(my $dh, $dir)
-    or die "Cannot open directory '$dir': $!\n";
-
-  while (my $file = readdir $dh) {
-    next if $file eq '.';
-    next if $file eq '..';
-
-    my $path = catfile($dir, $file);
-    if (-d $path) {
-      push @files, findadoc($path);
-      next;
-    }
-    next unless $file =~ m/\.adoc$/;
-    DEBUG "Found '$path'\n";
-    push @files, $path;
-  }
-
-  closedir $dh;
-  return @files;
-}
-
 sub check_alt {
   my $length = shift;
 
   my %results;
   foreach my $file (@_) {
-    DEBUG "Checking for unassigned image alt text in '$file'...\n";
+    BB::DEBUG "Checking for unassigned image alt text in '$file'...\n";
     open my $fh, '<', $file
       or die "Couldn't open file '$file': $!\n";
     chomp(my @lines = <$fh>);
@@ -88,11 +58,11 @@ sub check_alt {
 
     foreach my $line (@lines) {
       $count++;
-      DEBUG "Line $count: '$line'\n";
+      BB::DEBUG "Line $count: '$line'\n";
 
       # identify source blocks
       if ($line =~ m/image:.+\[(,|"\s*",)/) {
-        DEBUG "Unassigned alt text found in '$line'\n";
+        BB::DEBUG "Unassigned alt text found in '$line'\n";
         $results{$file} = [] unless exists $results{$file};
         push @{$results{$file}}, {
           line  => $count,
@@ -101,7 +71,7 @@ sub check_alt {
       }
     }
   }
-  DEBUG "Done checking unassigned alt text.\n";
+  BB::DEBUG "Done checking unassigned alt text.\n";
   return \%results;
 }
 
