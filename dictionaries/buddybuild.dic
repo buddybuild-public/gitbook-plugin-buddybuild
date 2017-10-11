@@ -1,4 +1,4 @@
-528
+535
 02T22
 0p648
 100a
@@ -42,6 +42,7 @@
 7b
 9M189t
 AAPT
+ADFS
 API/S
 APK/S
 APPID
@@ -104,6 +105,7 @@ Gradle
 HFS
 HipChat
 Homebrew
+IDP
 IPv4
 IPv6
 JIRA
@@ -126,7 +128,9 @@ NSNumber
 NSString
 Nano
 OAuth
+Okta
 Onboard/SDG
+OneLogin
 PNG
 Podfile
 Pre
@@ -150,9 +154,11 @@ RCTViewManager
 README
 RESTful
 RW
+SAML
 SEO
 SFSafariViewController
 SSL
+SSO
 STDOUT
 SVG
 Signup
@@ -169,6 +175,7 @@ UI
 UIApplication
 UIApplicationDelegate
 UIResponder
+URI
 UTF
 UTF8String
 UpdateSDK
