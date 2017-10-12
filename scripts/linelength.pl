@@ -71,6 +71,7 @@ sub check_length {
           if (length $delimiter and $delimiter eq $1) {
             BB::DEBUG "End delimiter for source block found.\n";
             $delimiter = '';
+            $in_source = 0;
             next;
           }
           if ($delimiter eq '') {
