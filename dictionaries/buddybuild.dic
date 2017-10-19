@@ -1,4 +1,4 @@
-539
+544
 02T22
 0p648
 100a
@@ -105,7 +105,7 @@ Gradle
 HFS
 HipChat
 Homebrew
-IDP
+IDP/S
 IPv4
 IPv6
 JIRA
@@ -239,6 +239,7 @@ bundleReleaseJsAndAssets
 bundler
 carthage
 ccmenu
+checkbox/S
 chruby
 ci
 claide
@@ -330,6 +331,7 @@ io
 ios
 ip
 ipa
+ipd/S
 itunes
 javascript
 jcenter
@@ -399,6 +401,7 @@ npm
 oauth
 objectivec
 octokit
+okta
 onCreate
 onboard/SDG
 ons
@@ -440,6 +443,7 @@ rubygems
 rubyzip
 runtime
 s3
+saml
 sdk
 secretKeyRingFile
 section/d
@@ -463,6 +467,7 @@ sigv4
 simplejson
 sqlite3
 squareup
+sso
 standardOutput
 startUITests
 stdout
