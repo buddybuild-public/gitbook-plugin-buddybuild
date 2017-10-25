@@ -1,4 +1,4 @@
-548
+551
 02T22
 0p648
 100a
@@ -100,6 +100,7 @@ FBSnapshotTestCase
 Facebook
 FinalizableReference
 GIF
+Gemfile
 GitLab
 Gradle
 HFS
@@ -154,6 +155,7 @@ RCTViewManager
 README
 RESTful
 RW
+RubyGems
 SAML
 SEO
 SFSafariViewController
@@ -443,6 +445,7 @@ repo/S
 resolutionStrategy
 retriable
 rf
+rspec
 rubygems
 rubyzip
 runtime
