@@ -8,9 +8,10 @@ use Getopt::Std;
 use Term::ANSIColor;
 use lib dirname (__FILE__);
 use BB;
+use YAML::Tiny;
 
 our %options;
-getopts('hvd:l:g:', \%options);
+getopts('hvd:l:t:s:', \%options);
 
 usage() if $options{h};
 
@@ -18,7 +19,11 @@ BB::set_verbose($options{v} ? 1 : 0);
 
 my $dir = $options{d} or usage("No scan directory provided!");
 my $length = $options{l} || 80;
-my $google_title_length = $options{g} || 68;
+
+our %meta = (
+  titletext   => ($options{t} || 75),
+  description => ($options{s} || 155),
+);
 
 our $violations = 0;
 
@@ -29,7 +34,7 @@ BB::DEBUG "File scanning complete.\n\n";
 my $results = check_length($length, @files);
 
 unless (scalar keys %$results) {
-  print color('bold green'), "all files fit within $length columns!", color('reset'), "\n";
+  print color('bold green'), "all files fit!", color('reset'), "\n";
   exit 0;
 }
 
@@ -58,6 +63,7 @@ sub check_length {
     my $count = 0;
     my $in_source = 0;
     my $in_yaml = 0;
+    my @yaml;
     my $delimiter = '';
 
     foreach my $line (@lines) {
@@ -81,22 +87,27 @@ sub check_length {
         if ($line =~ m/---/) {
           BB::DEBUG "End delimiter for YAML preamble found.\n";
           $in_yaml = 0;
+
+          my $yaml = YAML::Tiny->read_string(join "\n", @yaml);
+          my $config = $yaml->[0];
+          foreach my $key (sort keys %meta) {
+            my $value = $config->{$key};
+            my $length = length $value;
+            if ($length > $meta{$key}) {
+              BB::DEBUG "Meta $key too long ($length/$meta{$key}) for '$value'\n";
+              $results{$file} = [] unless exists $results{$file};
+              push @{$results{$file}}, {
+                line  => $count,
+                chars => $length,
+              };
+              $violations++;
+            }
+          }
+
           next;
         }
 
-        if ($line =~ m/titletext:\s?(.+)$/) {
-          my $tt = $1;
-          $tt =~ s/ *$//;
-          if (length $tt > $google_title_length) {
-            BB::DEBUG "Title text too long for '$line'\n";
-            $results{$file} = [] unless exists $results{$file};
-            push @{$results{$file}}, {
-              line  => $count,
-              chars => length $line,
-            };
-            $violations++;
-          }
-        }
+        push @yaml, $line;
       }
 
       # process source blocks
@@ -165,25 +176,33 @@ sub check_length {
   return \%results;
 }
 
+sub trim {
+  my $string = shift;
+  $string =~ s/^\s+|\s+$//g;
+  return $string;
+}
+
 sub usage {
   my $msg = shift;
 
   print "ERROR: $msg\n\n" if $msg;
   print <<USAGE;
 Usage:
-$0 [-hv] -d <directory to scan> -l <maximum length> [-g <max length>]
+$0 [-hv] -d <directory to scan> [-l <max line length>] \
+   [-s <max description tag length>] [-t <max title tag length>]
 
 Scans a directory for '*.adoc' files, checks the maximum line length
 within each, and emits a report of which lines in which files are
-too long. Also checked is the length of any 'titletext' attributes
-specified in the YAML preamble.
+too long. Also checked is the length of the meta tags 'title' and
+'description' that may be specified in the YAML preamble.
 
 Options:
  -h  This help text.
  -d  The directory to scan.
- -g  The length limit for titletext attributes. Defaults to 68.
  -l  The line length limit; lines longer than this are reported.
      Defaults to 80.
+ -s  The length limit for meta description text. Defaults to 155.
+ -t  The length limit for meta title text. Defaults to 75.
  -v  Verbose output.
 USAGE
 
