@@ -10,7 +10,7 @@ use lib dirname (__FILE__);
 use BB;
 
 our %options;
-getopts('hvd:l:', \%options);
+getopts('hvd:l:g:', \%options);
 
 usage() if $options{h};
 
@@ -18,6 +18,9 @@ BB::set_verbose($options{v} ? 1 : 0);
 
 my $dir = $options{d} or usage("No scan directory provided!");
 my $length = $options{l} || 80;
+my $google_title_length = $options{g} || 68;
+
+our $violations = 0;
 
 print "Checking line lengths in '$dir'... ";
 BB::DEBUG "\n";
@@ -30,7 +33,8 @@ unless (scalar keys %$results) {
   exit 0;
 }
 
-print color('bold red'), "Line length violations found!", color('reset'), "\n";
+print color('bold red'), "$violations line length violations found!",
+      color('reset'), "\n";
 foreach my $file (sort keys %$results) {
   print color('magenta'), $file, color('reset'), "\n";
   foreach my $details (@{ $results->{$file} }) {
@@ -53,16 +57,46 @@ sub check_length {
 
     my $count = 0;
     my $in_source = 0;
+    my $in_yaml = 0;
     my $delimiter = '';
 
     foreach my $line (@lines) {
       $count++;
       BB::DEBUG "Line $count: '$line'\n";
 
+      # identify YAML preamble
+      if ($count == 1 and $line =~ m/---/) {
+        $in_yaml = 1;
+        next;
+      }
+
       # identify source blocks
       if ($line =~ m/\[source[^\]]*\]/) {
         $in_source = 1;
         next;
+      }
+
+      # process YAML preamble
+      if ($in_yaml) {
+        if ($line =~ m/---/) {
+          BB::DEBUG "End delimiter for YAML preamble found.\n";
+          $in_yaml = 0;
+          next;
+        }
+
+        if ($line =~ m/titletext:\s?(.+)$/) {
+          my $tt = $1;
+          $tt =~ s/ *$//;
+          if (length $tt > $google_title_length) {
+            BB::DEBUG "Title text too long for '$line'\n";
+            $results{$file} = [] unless exists $results{$file};
+            push @{$results{$file}}, {
+              line  => $count,
+              chars => length $line,
+            };
+            $violations++;
+          }
+        }
       }
 
       # process source blocks
@@ -123,6 +157,7 @@ sub check_length {
           line  => $count,
           chars => length $line,
         };
+        $violations++;
       }
     }
   }
@@ -136,16 +171,17 @@ sub usage {
   print "ERROR: $msg\n\n" if $msg;
   print <<USAGE;
 Usage:
-$0 [-hv] -d <directory to scan> -l <maximum length>
+$0 [-hv] -d <directory to scan> -l <maximum length> [-g <max length>]
 
 Scans a directory for '*.adoc' files, checks the maximum line length
 within each, and emits a report of which lines in which files are
-too long.
-on each, and emits any spelling errors detected (exit code 1, if so).
+too long. Also checked is the length of any 'titletext' attributes
+specified in the YAML preamble.
 
 Options:
  -h  This help text.
  -d  The directory to scan.
+ -g  The length limit for titletext attributes. Defaults to 68.
  -l  The line length limit; lines longer than this are reported.
      Defaults to 80.
  -v  Verbose output.
