@@ -108,6 +108,7 @@ sub check_length {
         }
 
         push @yaml, $line;
+        next;
       }
 
       # process source blocks
