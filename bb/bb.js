@@ -291,5 +291,3 @@ BB.updateToolbarButtons = function () {
     ]
   });
 };
-
-window.BBLoaded["plugin"] = true;
