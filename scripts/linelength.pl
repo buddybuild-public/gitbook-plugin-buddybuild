@@ -92,13 +92,13 @@ sub check_length {
           my $config = $yaml->[0];
           foreach my $key (sort keys %meta) {
             my $value = $config->{$key};
-            my $length = length $value;
-            if ($length > $meta{$key}) {
-              BB::DEBUG "Meta $key too long ($length/$meta{$key}) for '$value'\n";
+            my $len   = (length $value) || 0;
+            if ($len > $meta{$key}) {
+              BB::DEBUG "Meta $key too long ($len/$meta{$key}) for '$value'\n";
               $results{$file} = [] unless exists $results{$file};
               push @{$results{$file}}, {
                 line  => $count,
-                chars => $length,
+                chars => $len,
               };
               $violations++;
             }
