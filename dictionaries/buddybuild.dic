@@ -1,4 +1,4 @@
-552
+555
 02T22
 0p648
 100a
@@ -107,6 +107,7 @@ HFS
 HipChat
 Homebrew
 IDP/S
+IPA/S
 IPv4
 IPv6
 JIRA
@@ -227,6 +228,7 @@ bbBuildNumber
 bigdecimal
 bitbucket
 bitbucketci
+bitcode
 boolean
 buddybuild/M
 buildConfigField
@@ -313,6 +315,7 @@ hardcode
 hasProperty
 helloworldandroid
 hipchat
+hoc
 hostname
 html
 http
