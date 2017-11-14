@@ -35,10 +35,9 @@ my $count = 0;
 foreach my $file (sort keys %$results) {
   print color('magenta'), "$file", color('reset'), "\n";
   foreach my $details (@{ $results->{$file} }) {
-    printf "%s%d%s: %s%s%s -> %s%s%s\n",
+    printf "%s%d%s: %s\n",
       color('green'), $details->{line}, color('reset'),
-      color('red'),   $details->{word}, color('reset'),
-      color('blue'),  $details->{text}, color('reset');
+      $details->{text};
     $count++;
   }
 }
@@ -49,6 +48,10 @@ exit 1;
 sub check_alt {
   my $length = shift;
 
+  my $a = color('magenta');
+  my $b = color('reset');
+  my $re = qr/(\b\S+\b)\s+(\b\1\b(?!-))/;
+
   my %results;
   foreach my $file (@_) {
     BB::DEBUG "Checking for repeated words in '$file'...\n";
@@ -58,19 +61,19 @@ sub check_alt {
     close $fh;
 
     my $count = 0;
-    my $delimiter = '';
-
     foreach my $line (@lines) {
       $count++;
       BB::DEBUG "Line $count: '$line'\n";
 
-      if ($line =~ m/\b(\w+)\s+\1\b/) {
-        BB::DEBUG "Repeated word '$1' found in '$line'\n";
+      if ($line =~ m/$re/i) {
+        my $text = $line;
+        $text =~ s/$re/$1 $a$2$b/ig;
+
+        BB::DEBUG "Repeated words found in '$line'\n";
         $results{$file} = [] unless exists $results{$file};
         push @{$results{$file}}, {
-          line => $count,
-          word => $1,
-          text => $line,
+          line  => $count,
+          text  => $text,
         };
       }
     }
