@@ -1,4 +1,4 @@
-566
+576
 02T22
 0p648
 100a
@@ -65,6 +65,7 @@ AssetsLibrary
 Atlassian
 AuthTests
 Automator
+BBCheckCleanDummy
 BOOL
 BUILDNO
 BatchedBridge
@@ -191,6 +192,7 @@ UpdateSDK
 Uploader
 UserID
 VM/S
+VNC
 VPN
 VersionCode
 VersionName
@@ -318,8 +320,11 @@ gitolite3
 gms
 googleauth
 gradle
+gradleArtifacts
+gradleBuildCache
 gradlew
 gt
+gz
 hardcode
 hasProperty
 helloworldandroid
@@ -466,6 +471,7 @@ runtime
 s3
 saml
 scp
+screenshare/G
 sdk
 secretKeyRingFile
 section/d
@@ -489,6 +495,7 @@ sigv4
 simplejson
 sqlite3
 squareup
+src
 sso
 standardOutput
 startUITests
@@ -505,6 +512,7 @@ subproject/S
 supertype
 svg
 symbolicate
+symlink/S
 takeScreenshotAndShowFeedbackScreen
 targetSdkVersion
 tearDown
@@ -513,6 +521,7 @@ testSignUp
 theLog
 tid
 titletext
+tmp
 toString
 travis
 trello
@@ -548,6 +557,7 @@ versionName
 versionSet
 virtualized
 vm
+vnc
 walkthrough
 wbr
 webhook/S
