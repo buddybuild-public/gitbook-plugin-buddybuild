@@ -1,4 +1,4 @@
-577
+579
 02T22
 0p648
 100a
@@ -62,6 +62,7 @@ AnyHashable
 AppDelegate
 AppIcon
 AppStore
+Asana
 AssetsLibrary
 Atlassian
 AuthTests
@@ -225,6 +226,7 @@ apk
 appStoreReceiptURL
 aren
 armeabi
+asana
 asl
 aslLevel
 async
