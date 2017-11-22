@@ -1077,6 +1077,7 @@ span.image:after {
   clear: both;
 }
 
+.right,
 span.image.right {
   float: right;
   margin-left: 1em;
@@ -1086,6 +1087,7 @@ span.image.thumb > img {
   width: 7.5em;
 }
 
+.frame,
 span.image.frame > img {
   padding: 16px;
   border-radius: 4px;
