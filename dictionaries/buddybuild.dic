@@ -1,4 +1,4 @@
-594
+598
 02T22
 0p648
 100a
@@ -501,6 +501,7 @@ setMetadataObject
 setText
 setUp
 setUserDisplayNameCallback
+settimezone
 sha
 shelljs
 showFailed
@@ -526,10 +527,12 @@ storePassword
 stringWithFormat
 submodule/S
 subproject/S
+sudo
 supertype
 svg
 symbolicate
 symlink/S
+systemsetup
 takeScreenshotAndShowFeedbackScreen
 targetSdkVersion
 tearDown
@@ -545,6 +548,7 @@ trello
 tty
 tvOS
 txt
+tz
 tzinfo
 uber
 ui
