@@ -1087,7 +1087,7 @@ span.image.thumb > img {
   width: 7.5em;
 }
 
-.frame,
+iframe.frame,
 span.image.frame > img {
   padding: 16px;
   border-radius: 4px;
