@@ -1152,6 +1152,26 @@ span.image.half > img {
   color: #a4c639;
 }
 
+.markdown-section .fa-lg {
+  font-size: 1.33333333em;
+}
+
+.markdown-section .fa-2x {
+  font-size: 2em;
+}
+
+.markdown-section .fa-3x {
+  font-size: 3em;
+}
+
+.markdown-section .fa-4x {
+  font-size: 4em;
+}
+
+.markdown-section .fa-5x {
+  font-size: 5em;
+}
+
 /* buttons -------------------------------------------------------- */
 
 .markdown-section a.button {
