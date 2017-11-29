@@ -1,4 +1,4 @@
-600
+601
 02T22
 0p648
 100a
@@ -381,6 +381,7 @@ jpg
 jquery
 js
 jsBundleDirDebug
+jsbundle
 json
 jumboMode
 jwt
