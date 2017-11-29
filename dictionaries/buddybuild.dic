@@ -1,4 +1,4 @@
-601
+605
 02T22
 0p648
 100a
@@ -242,6 +242,7 @@ async
 attr
 authToken
 aws
+awscli
 babosa
 bashrc
 bb
@@ -300,6 +301,7 @@ eg
 endmethod
 error/d
 excon
+executable/S
 facebook
 faendir
 faq
@@ -429,6 +431,7 @@ multipart
 mv
 myAwesomeApp
 myalias
+mybucket
 mycompany
 mykeypassword
 myprefix
@@ -534,6 +537,7 @@ sudo
 supertype
 svg
 symbolicate
+symbolicate/G
 symlink/S
 systemsetup
 takeScreenshotAndShowFeedbackScreen
