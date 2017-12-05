@@ -1,4 +1,4 @@
-608
+610
 02T22
 0b7eaf47fa20abddaca00ddec0d36f9be31a9ad0b7e7
 0p648
@@ -140,6 +140,7 @@ MyAppTests
 NSBundle
 NSDate
 NSDictionary
+NSLog
 NSNumber
 NSString
 Nano
@@ -310,6 +311,7 @@ faraday
 fastimage
 fastlane
 fbsdk
+fbsnapshottestcase
 fe20
 fetchCompletionHandler
 ffi
