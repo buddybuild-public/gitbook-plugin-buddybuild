@@ -42,7 +42,7 @@ unless (scalar keys %$results) {
 
 print color('bold red'), "some found!", color('reset'), "\n";
 foreach my $file (sort keys %$results) {
-  print color('magenta'), $file, color('reset'), ":\n";
+  print color('magenta'), $file, color('reset'), "\n";
 
   my $i = $results->{$file};
   foreach my $image (@$i) {
