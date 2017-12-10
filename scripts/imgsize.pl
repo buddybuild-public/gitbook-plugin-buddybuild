@@ -101,7 +101,7 @@ sub check_sizes {
       BB::DEBUG "Attributes for '$image': $attributes\n";
 
       # Remove quoted alt text content to avoid bad split later.
-      $attributes =~ s/"(.*)?"/"-"/;
+      $attributes =~ s/"(.*?)"/"-"/;
 
       my @attr = split m/\s*,\s*/, $attributes;
       my $width = "na";
