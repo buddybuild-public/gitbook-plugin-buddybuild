@@ -122,6 +122,8 @@ sub check_sizes {
 
       # Get the image's dimensions
       my $img_info = image_info($referenced_path);
+      BB::DEBUG "Image info:\n". Dumper($img_info);
+
       my ($iw, $ih) = dim($img_info);
       if (!defined $iw or !defined $ih) {
         BB::DEBUG "Bad dimensions for '$image'!\n";
