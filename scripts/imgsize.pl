@@ -89,6 +89,7 @@ sub check_sizes {
       my $image = $1;
       my $attributes = $'; # Everything after the match above.
       next if $image =~ m@^https?://@; # don't check sizes of remote images
+      next if $image =~ m/\.svg$/; # No need to worry about SVG sizing.
 
       # Assemble the image's attributes, which may span multiple lines.
       my $contender = $attributes;
