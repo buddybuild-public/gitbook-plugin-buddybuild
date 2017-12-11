@@ -142,8 +142,8 @@ sub check_sizes {
       }
       BB::DEBUG "Image visible width=$iw, height=$ih (at $dpi dpi)\n";
 
-      if (($width ne "na" and $width != $iw)
-          or ($height ne "na" and $height != $ih)) {
+      if (($width eq "na" or $width != $iw)
+          or ($height eq "na" or $height != $ih)) {
         BB::DEBUG "===== Size mismatch!\n";
         $results{$file} = [] unless exists $results{$file};
 
