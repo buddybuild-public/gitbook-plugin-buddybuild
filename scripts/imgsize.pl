@@ -123,6 +123,11 @@ sub check_sizes {
       # Get the image's dimensions
       my $img_info = image_info($referenced_path);
       my ($iw, $ih) = dim($img_info);
+      if (!defined $iw or !defined $ih) {
+        BB::DEBUG "Bad dimensions for '$image'!\n";
+        $iw //= 0;
+        $ih //= 0;
+      }
       BB::DEBUG "Image physical width=$iw, height=$ih\n";
 
       my $dots = 72;
