@@ -46,6 +46,14 @@ foreach my $file (sort keys %$results) {
 
   my $i = $results->{$file};
   foreach my $image (@$i) {
+    if ($image->{missing}) {
+      printf "  %s%d%s: '%s' %s%s%s\n",
+        color('cyan'), $image->{line}, color('reset'),
+        $image->{image},
+        color('red'), "MISSING", color('reset')
+      ;
+      next;
+    }
     printf "  %s%d%s: '%s' set=%s%s,%s%s img=%s%d,%d%s\n",
       color('cyan'), $image->{line}, color('reset'),
       $image->{image},
@@ -120,8 +128,27 @@ sub check_sizes {
         ), $abs_dir
       );
 
+      unless (-f $referenced_path) {
+        BB::DEBUG "===== Missing image!\n";
+        $results{$file} = [] unless exists $results{$file};
+
+        push @{ $results{$file} }, {
+          image   => $image,
+          path    => $referenced_path,
+          line    => $count,
+          sw      => $width,
+          sh      => $height,
+          aw      => 0,
+          ah      => 0,
+          missing => 1,
+        };
+        next;
+      }
+
       # Get the image's dimensions
       my $img_info = image_info($referenced_path);
+      BB::DEBUG "Image info:\n". Dumper($img_info);
+
       my ($iw, $ih) = dim($img_info);
       if (!defined $iw or !defined $ih) {
         BB::DEBUG "Bad dimensions for '$image'!\n";
@@ -154,13 +181,14 @@ sub check_sizes {
         $results{$file} = [] unless exists $results{$file};
 
         push @{ $results{$file} }, {
-          image => $image,
-          path  => $referenced_path,
-          line  => $count,
-          sw    => $width,
-          sh    => $height,
-          aw    => $iw,
-          ah    => $ih,
+          image   => $image,
+          path    => $referenced_path,
+          line    => $count,
+          sw      => $width,
+          sh      => $height,
+          aw      => $iw,
+          ah      => $ih,
+          missing => 0,
         };
       }
     }
