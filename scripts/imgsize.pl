@@ -47,10 +47,11 @@ foreach my $file (sort keys %$results) {
   my $i = $results->{$file};
   foreach my $image (@$i) {
     if ($image->{missing}) {
-      printf "  %s%d%s: '%s' %s%s%s\n",
+      printf "  %s%d%s: '%s' %s%s%s '%s'\n",
         color('cyan'), $image->{line}, color('reset'),
         $image->{image},
-        color('red'), "MISSING", color('reset')
+        color('red'), "MISSING", color('reset'),
+        $image->{path}
       ;
       next;
     }
@@ -122,11 +123,15 @@ sub check_sizes {
       BB::DEBUG "Image specified width=$width, height=$height\n";
 
       # Convert referenced image path into canonical relative path
+      my $image_path = catfile($file_path, $image);
+      if ($image =~ m/{{readme.path}}(.+)$/) {
+        $image_path = catfile($abs_dir, $1);
+      }
       my $referenced_path = File::Spec->abs2rel(
-        abs_path(
-          catfile($file_path, $image)
-        ), $abs_dir
+        abs_path($image_path),
+        $abs_dir
       );
+      BB::DEBUG "Referenced path: '$referenced_path'\n";
 
       unless (-f $referenced_path) {
         BB::DEBUG "===== Missing image!\n";
