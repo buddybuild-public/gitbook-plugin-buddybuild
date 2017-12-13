@@ -77,11 +77,15 @@ sub check_images {
       next if $image =~ m@^https?://@; # URLs should be fine.
 
       # Convert referenced image path into canonical relative path
+      my $image_path = catfile($file_path, $image);
+      if ($image =~ m/{{readme.path}}(.+)$/) {
+        $image_path = catfile($abs_dir, $1);
+      }
       my $referenced_path = File::Spec->abs2rel(
-        abs_path(
-          catfile($file_path, $image)
-        ), $abs_dir
+        abs_path($image_path),
+        $abs_dir
       );
+      BB::DEBUG "Referenced path: '$referenced_path'\n";
 
       $used{$referenced_path} = 1
         if exists $image_map{$referenced_path};
