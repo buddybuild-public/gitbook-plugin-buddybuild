@@ -36,7 +36,7 @@ BB::DEBUG "File scanning complete.\n\n";
 my $results = check_sizes($dir, \@adoc, \@images);
 
 unless (scalar keys %$results) {
-  print color('bold green'), "none found!", color('reset'), "\n";
+  print color('bold green'), "all sizes match!", color('reset'), "\n";
   exit 0;
 }
 
