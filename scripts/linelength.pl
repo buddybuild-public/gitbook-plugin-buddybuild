@@ -43,8 +43,10 @@ print color('bold red'), "$violations line length violations found!",
 foreach my $file (sort keys %$results) {
   print color('magenta'), $file, color('reset'), "\n";
   foreach my $details (@{ $results->{$file} }) {
-    printf "%s%d%s: %s%d%s characters\n", color('green'), $details->{line}, color('reset'),
-            color('red'), $details->{chars}, color('reset');
+    printf "%s%d%s: %s%d%s/%s%d%s characters\n",
+      color('green'), $details->{line}, color('reset'),
+      color('red'), $details->{chars}, color('reset'),
+      color('blue'), $details->{limit}, color('reset');
   }
 }
 exit 1;
@@ -168,6 +170,7 @@ sub check_length {
         push @{$results{$file}}, {
           line  => $count,
           chars => length $line,
+          limit => $length,
         };
         $violations++;
       }
