@@ -101,6 +101,7 @@ sub check_length {
               push @{$results{$file}}, {
                 line  => $count,
                 chars => $len,
+                limit => $meta{$key},
               };
               $violations++;
             }
