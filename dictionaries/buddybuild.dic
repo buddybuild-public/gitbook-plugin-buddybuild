@@ -1,4 +1,4 @@
-665
+673
 00000001000c35a0
 0000000182e89014
 0000000182e89a88
@@ -131,8 +131,10 @@ Couldn
 Crashlytics
 CurrentState
 DNS
+Dangerfile
 DependencyResolveDetails
 Dev
+ENV
 FBSDKShareKit
 FBSnapshotTestCase
 Facebook
@@ -213,6 +215,8 @@ SSO
 STDOUT
 SVG
 Signup
+SourceKit
+Swiftlint
 SystemConfiguration
 TFS
 TaskInputsInternal
@@ -240,6 +244,7 @@ VNC
 VPN
 VersionCode
 VersionName
+WIP
 WebHooks
 Wifi
 Win7
@@ -531,6 +536,7 @@ rc
 rdoc
 readme
 redcarpet
+relnotes
 repo/S
 resolutionStrategy
 retriable
@@ -588,6 +594,7 @@ subproject/S
 sudo
 supertype
 svg
+swiftlint
 symbolicate
 symbolicate/G
 symlink/S
@@ -661,6 +668,7 @@ xcinvoke
 xcode
 xcodebuild
 xcodeproj
+xcov
 xcpretty
 xml
 yml
