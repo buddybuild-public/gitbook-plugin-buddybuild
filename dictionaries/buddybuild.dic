@@ -1,4 +1,4 @@
-673
+680
 00000001000c35a0
 0000000182e89014
 0000000182e89a88
@@ -203,6 +203,7 @@ RCTSetLogThreshold
 RCTViewManager
 README
 RESTful
+RSA
 RW
 Renderer/S
 RubyGem/S
@@ -268,6 +269,7 @@ allprojects
 alpha/d
 amazonaws
 analytics
+androidreleasekey
 api
 apis
 apitoken
@@ -366,6 +368,7 @@ fsevent
 func
 g6ed0156
 gcc
+genkey
 getInputs
 getString
 getVersionName
@@ -438,10 +441,13 @@ kernreturn
 keyAlias
 keyId
 keyPassword
+keyalg
 keyboardNavigationCluster
 keychain/S
 keydir
 keydir Kotlin
+keypass
+keysize
 keystore/S
 keytool
 kotlin
@@ -587,6 +593,7 @@ step2b
 stopUITests
 storeFile
 storePassword
+storepass
 strcpy
 stringWithFormat
 submodule/S
