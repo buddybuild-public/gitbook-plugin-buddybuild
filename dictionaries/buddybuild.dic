@@ -604,6 +604,7 @@ subproject/S
 sudo
 supertype
 svg
+SwiftLint
 swiftlint
 symbolicate
 symbolicate/G
